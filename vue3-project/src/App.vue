@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div class="name">{{ name }}</div>
+    <div class="name">
+    {{ name }}- {{name2}}
+    </div>
     <div>HI. Welcome</div>
     {{ greet }}
     <button class="btn btn-primary" v-on:click="consoleLog">Click</button>
@@ -9,25 +11,31 @@
 </template>
 
 <script>
+import {ref} from 'vue';
+import {reactive} from 'vue';
+
 export default {
   setup() {
-    let name = "kim NY";
-    const greeting = (name) => {
-      return "Hello " + name;
-    };
-    const greet = greeting(name);
+
+    const name=ref('Kim NY Welcome');
+    const name2=reactive({id:1});
+        
     const consoleLog = () => {
       console.log("Hello World");
+        name.value ="Hello";
+        name2.id="KIM";
     };
+
     const updateName = () => {
-      name = "Kim Yu Na";
-      console.log(name);
+      name.value = "Kim Yu Na";
+      name2.id="Welcome";
+      console.log(name.value);
     };
     return {
-      name,
-      greet,
+      name,      
       consoleLog,
-      updateName
+      updateName,
+      name2
     };
   },
 };
