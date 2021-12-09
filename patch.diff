@@ -1,0 +1,87 @@
+From 8e32519910ba7dfb190fa5b1927159da5f196bbe Mon Sep 17 00:00:00 2001
+From: knyatom <58832580+knyatom@users.noreply.github.com>
+Date: Sun, 5 Dec 2021 00:28:09 +0900
+Subject: [PATCH] 1205
+
+---
+ vue3-project/src/App.vue | 40 ++++++++++++++++++++++++----------------
+ 1 file changed, 24 insertions(+), 16 deletions(-)
+
+diff --git a/vue3-project/src/App.vue b/vue3-project/src/App.vue
+index 3938431..3afd20d 100644
+--- a/vue3-project/src/App.vue
++++ b/vue3-project/src/App.vue
+@@ -1,41 +1,46 @@
+ <template>
+-  <div>
+-    <div class="name">
+-    {{ name }}- {{name2}}
+-    </div>
++  <div v-bind:class="nameClass">
++    <div class="name">{{ name }}- {{ name2 }}</div>
+     <div>HI. Welcome</div>
+     {{ greet }}
+     <button class="btn btn-primary" v-on:click="consoleLog">Click</button>
+     <button class="btn btn-primary" v-on:click="updateName">Update</button>
++    <br />
++    <input type="text" v-bind:value="name" />
++    <input v-bind:type="type" v-bind:value="name" />
+   </div>
+ </template>
+-
+ <script>
+-import {ref} from 'vue';
+-import {reactive} from 'vue';
++import { ref } from "vue";
++import { reactive } from "vue";
+ 
+ export default {
+   setup() {
+-
+-    const name=ref('Kim NY Welcome');
+-    const name2=reactive({id:1});
+-        
++    const name = ref("Kim NY Welcome");
++    const name2 = reactive({ id: 1 });
++    const type = ref("text");
++    const nameClass = ref("name");
+     const consoleLog = () => {
+       console.log("Hello World");
+-        name.value ="Hello";
+-        name2.id="KIM";
++      name.value = "Hello";
++      name2.id = "KIM";
++       nameClass.value = "name";
+     };
+ 
+     const updateName = () => {
+       name.value = "Kim Yu Na";
+-      name2.id="Welcome";
++      name2.id = "Welcome";
++      type.value = "number";
++      nameClass.value = "name2";
+       console.log(name.value);
+     };
+     return {
+-      name,      
++      name,
+       consoleLog,
+       updateName,
+-      name2
++      name2,
++      type,
++      nameClass
+     };
+   },
+ };
+@@ -45,4 +50,7 @@ export default {
+ .name {
+   color: blue;
+ }
++.name2 {
++  color: red;
++}
+ </style>
+-- 
+2.30.2.windows.1
+
